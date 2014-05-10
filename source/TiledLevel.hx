@@ -114,11 +114,13 @@ class TiledLevel extends TiledMap
 			case "floor":
 				var floor = new FlxObject(x, y, o.width, o.height);
 				state.floor = floor;
-				
+			case "enemy":
+				var enemy = new Enemy(x, y);
+				state.addEnemy(enemy);
 			case "coin":
 				var tileset = g.map.getGidOwner(o.gid);
-				var coin = new FlxSprite(x, y, c_PATH_LEVEL_TILESHEETS + tileset.imageSource);
-				state.coins.add(coin);
+				//var coin = new FlxSprite(x, y, c_PATH_LEVEL_TILESHEETS + tileset.imageSource);
+				//state.coins.add(coin);
 				
 			case "exit":
 				// Create the level exit
