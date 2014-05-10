@@ -30,7 +30,7 @@ class PlayState extends FlxState
     private var moveSpeed:Float;
     private var music:FlxSound;
 
-    public static var MAX_LEVELS = 5;
+    public static var MAX_LEVELS = 6;
 
     public function new(levelNo:Int, glitched:Bool, died:Bool):Void {
         super();
