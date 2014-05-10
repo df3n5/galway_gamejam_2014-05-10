@@ -22,9 +22,16 @@ class PlayState extends FlxState
 	
 	private static var youDied:Bool = false;
 	private var jumpVelocity:Float;
+    private var levelNo:Int;
+
+    public static var MAX_LEVELS = 2;
+
+	public function new(levelNo:Int):Void {
+        super();
+        this.levelNo = levelNo;
+    }
 	
-	override public function create():Void 
-	{
+	public override function create():Void {
 		FlxG.mouse.visible = false;
 
         glitchMode = false;
@@ -33,7 +40,7 @@ class PlayState extends FlxState
 		bgColor = 0xffaaaaaa;
 		
 		// Load the level's tilemaps
-		level = new TiledLevel("assets/tiled/level.tmx");
+		level = new TiledLevel("assets/tiled/level" + levelNo + ".tmx");
 		
 		// Add tilemaps
 		add(level.foregroundTiles);
@@ -110,7 +117,7 @@ class PlayState extends FlxState
 		if (FlxG.overlap(player, floor))
 		{
 			youDied = true;
-			FlxG.resetState();
+            FlxG.switchState(new PlayState(this.levelNo));
 		}
 	}
 	
@@ -119,6 +126,13 @@ class PlayState extends FlxState
 		status.text = "Yay, you won!";
 		score.text = "SCORE: 5000";
 		player.kill();
+        if((this.levelNo+1) == MAX_LEVELS) {
+            trace("Max levels reached");
+            FlxG.switchState(new FinishState());
+        } else {
+            trace("Not max levels reached");
+            FlxG.switchState(new PlayState(this.levelNo+1));
+        }
 	}
 	
 	public function getCoin(Coin:FlxObject, Player:FlxObject):Void
