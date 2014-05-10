@@ -162,6 +162,11 @@ class PlayState extends FlxState
 
     public function win(Exit:FlxObject, Player:FlxObject):Void
     {
+        if(glitchMode){
+            FlxG.sound.play("assets/sounds/Win.wav", 1.0, false);
+        }else {
+            FlxG.sound.play("assets/sounds/GlitchWin.wav",1.0,false);
+        }
         player.kill();
         if((this.levelNo+1) == MAX_LEVELS) {
             FlxG.switchState(new FinishState());
