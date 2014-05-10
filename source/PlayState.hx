@@ -18,12 +18,15 @@ class PlayState extends FlxState
 	public var player:FlxSprite;
 	public var floor:FlxObject;
 	public var exit:FlxSprite;
+	public var glitchMode:Bool;
 	
 	private static var youDied:Bool = false;
 	
 	override public function create():Void 
 	{
 		FlxG.mouse.visible = false;
+
+        glitchMode = false;
 		
 		//super.create();
 		bgColor = 0xffaaaaaa;
@@ -70,6 +73,14 @@ class PlayState extends FlxState
 	override public function update():Void 
 	{
 		player.acceleration.x = 0;
+		if (FlxG.keys.justPressed.SPACE) {
+            glitchMode = ! glitchMode;
+            if(glitchMode) {
+                FlxG.camera.color = 0x00FF00FF;
+            } else {
+                FlxG.camera.color = 0xFFFFFFFF;
+            }
+        }
 		if (FlxG.keys.pressed.LEFT || FlxG.keys.pressed.A)
 		{
 			player.acceleration.x = -player.maxVelocity.x * 4;
