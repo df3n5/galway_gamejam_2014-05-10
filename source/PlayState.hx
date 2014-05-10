@@ -12,8 +12,10 @@ class PlayState extends FlxState
 {
 	public var level:TiledLevel;
 	
+/*
 	public var score:FlxText;
 	public var status:FlxText;
+*/
 	public var coins:FlxGroup;
 	public var player:FlxSprite;
 	public var floor:FlxObject;
@@ -24,7 +26,7 @@ class PlayState extends FlxState
 	private var jumpVelocity:Float;
     private var levelNo:Int;
 
-    public static var MAX_LEVELS = 2;
+    public static var MAX_LEVELS = 3;
 
 	public function new(levelNo:Int):Void {
         super();
@@ -55,6 +57,7 @@ class PlayState extends FlxState
 		// Add background tiles after adding level objects, so these tiles render on top of player
 		add(level.backgroundTiles);
 		
+/*
 		// Create UI
 		score = new FlxText(2, 2, 80);
 		score.scrollFactor.set(0, 0); 
@@ -68,15 +71,18 @@ class PlayState extends FlxState
 		status.borderColor = 0xff000000;
 		score.borderStyle = FlxText.BORDER_SHADOW;
 		status.alignment = "right";
+*/
 		
+/*
 		if (youDied == false) {
 			status.text = "Collect coins.";
         } else {
 			status.text = "Aww, you died!";
         }
+*/
         jumpVelocity = -player.maxVelocity.y / 2;
 		
-		add(status);
+//		add(status);
 	}
 	
 	override public function update():Void 
@@ -92,23 +98,28 @@ class PlayState extends FlxState
                 jumpVelocity = -player.maxVelocity.y / 2;
             }
         }
+
+		if (FlxG.keys.justPressed.ONE) {
+            FlxG.switchState(new PlayState(1));
+        }
+		if (FlxG.keys.justPressed.TWO) {
+            FlxG.switchState(new PlayState(2));
+        }
+
         var nothingPressed = true;
-		if (FlxG.keys.pressed.LEFT || FlxG.keys.pressed.A)
-		{
+		if (FlxG.keys.pressed.LEFT || FlxG.keys.pressed.A) {
             nothingPressed = false;
 			player.acceleration.x = -player.maxVelocity.x * 4;
             //player.facing = FlxObject.LEFT;
             player.flipX = true;
 		}
-		if (FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.D)
-		{
+		if (FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.D) {
             nothingPressed = false;
 			player.acceleration.x = player.maxVelocity.x * 4;
             //player.facing = FlxObject.RIGHT;
             player.flipX = false;
 		}
-		if (FlxG.keys.pressed.W && player.isTouching(FlxObject.FLOOR))
-		{
+		if (FlxG.keys.pressed.W && player.isTouching(FlxObject.FLOOR)) {
             nothingPressed = false;
 			//player.velocity.y = -player.maxVelocity.y / 2;
 			player.velocity.y = jumpVelocity;
@@ -144,14 +155,10 @@ class PlayState extends FlxState
 	
 	public function win(Exit:FlxObject, Player:FlxObject):Void
 	{
-		status.text = "Yay, you won!";
-		score.text = "SCORE: 5000";
 		player.kill();
         if((this.levelNo+1) == MAX_LEVELS) {
-            trace("Max levels reached");
             FlxG.switchState(new FinishState());
         } else {
-            trace("Not max levels reached");
             FlxG.switchState(new PlayState(this.levelNo+1));
         }
 	}
@@ -159,7 +166,7 @@ class PlayState extends FlxState
 	public function getCoin(Coin:FlxObject, Player:FlxObject):Void
 	{
 		Coin.kill();
-		score.text = "SCORE: " + (coins.countDead() * 100);
+		//score.text = "SCORE: " + (coins.countDead() * 100);
         /*
 		if (coins.countLiving() == 0)
 		{
