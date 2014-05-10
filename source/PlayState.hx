@@ -133,6 +133,7 @@ class PlayState extends FlxState
         }
         super.update();
         if(glitchMode) {
+            exit.animation.play("weird");
             if(nothingPressed) {
                 player.animation.play("stop");
             } else {
@@ -140,6 +141,7 @@ class PlayState extends FlxState
                 player.drag.x = 0;
             }
         } else {
+            exit.animation.play("normal");
             if(nothingPressed) {
                 player.animation.play("normalstop");
             } else {
@@ -162,6 +164,11 @@ class PlayState extends FlxState
 
     public function win(Exit:FlxObject, Player:FlxObject):Void
     {
+        if(glitchMode){
+            FlxG.sound.play("assets/sounds/Win.wav", 1.0, false);
+        }else {
+            FlxG.sound.play("assets/sounds/GlitchWin.wav",1.0,false);
+        }
         player.kill();
         if((this.levelNo+1) == MAX_LEVELS) {
             FlxG.switchState(new FinishState());
