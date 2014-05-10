@@ -100,8 +100,8 @@ class TiledLevel extends TiledMap
 		switch (o.type.toLowerCase())
 		{
 			case "player_start":
-				var player = new FlxSprite(x, y);
-				player.makeGraphic(32, 32, 0xffaa1111);
+				var player = new FlxSprite(x, y, "assets/images/Stationary.png");
+				//player.makeGraphic(32, 32, 0xffaa1111);
 				player.maxVelocity.x = 160;
 				player.maxVelocity.y = 400;
 				player.acceleration.y = 400;
