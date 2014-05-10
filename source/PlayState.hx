@@ -29,6 +29,7 @@ class PlayState extends FlxState
     private var levelNo:Int;
     private var moveSpeed:Float;
     private var music:FlxSound;
+    public var overlay:FlxSprite;
 
     public static var MAX_LEVELS = 6;
 
@@ -110,6 +111,11 @@ class PlayState extends FlxState
                 FlxG.sound.play("assets/sounds/Win.wav");
             }
         }
+        this.overlay = new FlxSprite("assets/tiled/Overlay.png");
+        this.overlay.visible = false;
+        overlay.scrollFactor.x = 0;
+        overlay.scrollFactor.y = 0;
+        add(this.overlay);
     }
 
     override public function update():Void 
@@ -122,18 +128,20 @@ class PlayState extends FlxState
                     FlxG.sound.music.stop();
                 }
                 FlxG.sound.playMusic("assets/sounds/Glitchloop.wav", 0.3, true);
-                FlxG.camera.color = 0x00FF00FF;
+                //FlxG.camera.color = 0x00FF00FF;
                 jumpVelocity = -player.maxVelocity.y;
                 //moveSpeed = player.maxVelocity.x * 100000;
                 moveSpeed = player.maxVelocity.x * 22;
+                this.overlay.visible = true;
             } else {
                 if(FlxG.sound.music != null) {
                     FlxG.sound.music.stop();
                 }
                 FlxG.sound.playMusic("assets/sounds/Gameloop.wav", 0.3, true);
-                FlxG.camera.color = 0xFFFFFFFF;
+                //FlxG.camera.color = 0xFFFFFFFF;
                 jumpVelocity = -player.maxVelocity.y / 2;
                 moveSpeed = player.maxVelocity.x;
+                this.overlay.visible = false;
             }
         }
 
