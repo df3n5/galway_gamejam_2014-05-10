@@ -125,6 +125,9 @@ class PlayState extends FlxState
         if (FlxG.keys.justPressed.TWO) {
             FlxG.switchState(new PlayState(2));
         }
+        if (FlxG.keys.justPressed.THREE) {
+            FlxG.switchState(new PlayState(3));
+        }
 
         var nothingPressed = true;
         if (FlxG.keys.pressed.LEFT || FlxG.keys.pressed.A) {
