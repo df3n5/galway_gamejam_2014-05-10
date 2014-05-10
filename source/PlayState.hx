@@ -100,6 +100,7 @@ class PlayState extends FlxState
         if (FlxG.keys.justPressed.SPACE) {
             glitchMode = ! glitchMode;
             if(glitchMode) {
+                FlxG.sound.play("assets/sounds/GlitchJump.wav");
                 if(FlxG.sound.music != null) {
                     FlxG.sound.music.stop();
                 }
@@ -109,6 +110,7 @@ class PlayState extends FlxState
                 //moveSpeed = player.maxVelocity.x * 100000;
                 moveSpeed = player.maxVelocity.x * 22;
             } else {
+                FlxG.sound.play("assets/sounds/Jump.wav");
                 if(FlxG.sound.music != null) {
                     FlxG.sound.music.stop();
                 }
@@ -173,8 +175,7 @@ class PlayState extends FlxState
         // Collide with foreground tile layer
         level.collideWithLevel(player);
         FlxG.overlap(exit, player, win, pixelPerfectProcess);
-        if (FlxG.overlap(player, floor))
-        {
+        if (FlxG.overlap(player, floor)) {
             youDied = true;
             FlxG.switchState(new PlayState(this.levelNo));
         }
@@ -211,6 +212,11 @@ class PlayState extends FlxState
     public function collideEnemy(enemy:FlxObject, player:FlxObject):Void {
         youDied = true;
         FlxG.switchState(new PlayState(this.levelNo));
+        if(glitchMode) {
+            FlxG.sound.play("assets/sounds/GlitchDeath.wav");
+        } else {
+            FlxG.sound.play("assets/sounds/Death.wav");
+        }
     }
 
     public function addEnemy(enemy:FlxObject):Void {
