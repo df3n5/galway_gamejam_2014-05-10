@@ -25,6 +25,7 @@ class PlayState extends FlxState
     private static var youDied:Bool = false;
     private var jumpVelocity:Float;
     private var levelNo:Int;
+    private var moveSpeed:Float;
 
     public static var MAX_LEVELS = 3;
 
@@ -83,6 +84,7 @@ class PlayState extends FlxState
         jumpVelocity = -player.maxVelocity.y / 2;
 
         //		add(status);
+        moveSpeed = player.maxVelocity.x;
     }
 
     override public function update():Void 
@@ -93,9 +95,12 @@ class PlayState extends FlxState
             if(glitchMode) {
                 FlxG.camera.color = 0x00FF00FF;
                 jumpVelocity = -player.maxVelocity.y;
+                //moveSpeed = player.maxVelocity.x * 100000;
+                moveSpeed = player.maxVelocity.x * 22;
             } else {
                 FlxG.camera.color = 0xFFFFFFFF;
                 jumpVelocity = -player.maxVelocity.y / 2;
+                moveSpeed = player.maxVelocity.x;
             }
         }
 
@@ -109,13 +114,15 @@ class PlayState extends FlxState
         var nothingPressed = true;
         if (FlxG.keys.pressed.LEFT || FlxG.keys.pressed.A) {
             nothingPressed = false;
-            player.acceleration.x = -player.maxVelocity.x * 4;
+            //player.acceleration.x = -moveSpeed;
+            player.velocity.x = -moveSpeed;
             //player.facing = FlxObject.LEFT;
             player.flipX = true;
         }
         if (FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.D) {
             nothingPressed = false;
-            player.acceleration.x = player.maxVelocity.x * 4;
+            //player.acceleration.x = moveSpeed;
+            player.velocity.x = moveSpeed;
             //player.facing = FlxObject.RIGHT;
             player.flipX = false;
         }
@@ -130,12 +137,14 @@ class PlayState extends FlxState
                 player.animation.play("stop");
             } else {
                 player.animation.play("walk");
+                player.drag.x = 0;
             }
         } else {
             if(nothingPressed) {
                 player.animation.play("normalstop");
             } else {
                 player.animation.play("normalwalk");
+                player.drag.x = player.maxVelocity.x * 4;
             }
         }
 
@@ -143,12 +152,7 @@ class PlayState extends FlxState
 
         // Collide with foreground tile layer
         level.collideWithLevel(player);
-
-        //FlxG.overlap(enemies, player, getCoin);
-
         FlxG.overlap(exit, player, win, pixelPerfectProcess);
-
-
         if (FlxG.overlap(player, floor))
         {
             youDied = true;
