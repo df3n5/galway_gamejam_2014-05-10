@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
+import flixel.system.FlxSound;
 import flixel.FlxObject;
 import flixel.text.FlxText;
 import flixel.group.FlxGroup;
@@ -26,6 +27,7 @@ class PlayState extends FlxState
     private var jumpVelocity:Float;
     private var levelNo:Int;
     private var moveSpeed:Float;
+    private var music:FlxSound;
 
     public static var MAX_LEVELS = 3;
 
@@ -82,9 +84,14 @@ class PlayState extends FlxState
            }
          */
         jumpVelocity = -player.maxVelocity.y / 2;
+        music = null;
 
         //		add(status);
         moveSpeed = player.maxVelocity.x;
+        if(FlxG.sound.music != null) {
+            FlxG.sound.music.stop();
+        }
+        FlxG.sound.playMusic("assets/sounds/Gameloop.wav", true);
     }
 
     override public function update():Void 
@@ -93,11 +100,19 @@ class PlayState extends FlxState
         if (FlxG.keys.justPressed.SPACE) {
             glitchMode = ! glitchMode;
             if(glitchMode) {
+                if(FlxG.sound.music != null) {
+                    FlxG.sound.music.stop();
+                }
+                FlxG.sound.playMusic("assets/sounds/Glitchloop.wav", true);
                 FlxG.camera.color = 0x00FF00FF;
                 jumpVelocity = -player.maxVelocity.y;
                 //moveSpeed = player.maxVelocity.x * 100000;
                 moveSpeed = player.maxVelocity.x * 22;
             } else {
+                if(FlxG.sound.music != null) {
+                    FlxG.sound.music.stop();
+                }
+                FlxG.sound.playMusic("assets/sounds/Gameloop.wav", true);
                 FlxG.camera.color = 0xFFFFFFFF;
                 jumpVelocity = -player.maxVelocity.y / 2;
                 moveSpeed = player.maxVelocity.x;
@@ -165,9 +180,9 @@ class PlayState extends FlxState
     public function win(Exit:FlxObject, Player:FlxObject):Void
     {
         if(glitchMode){
-            FlxG.sound.play("assets/sounds/Win.wav", 1.0, false);
+            FlxG.sound.play("assets/sounds/Win.wav");
         }else {
-            FlxG.sound.play("assets/sounds/GlitchWin.wav",1.0,false);
+            FlxG.sound.play("assets/sounds/GlitchWin.wav");
         }
         player.kill();
         if((this.levelNo+1) == MAX_LEVELS) {
