@@ -52,6 +52,9 @@ class PlayState extends FlxState
         // Load the level's tilemaps
         level = new TiledLevel("assets/tiled/level" + levelNo + ".tmx");
 
+        // Add background tiles after adding level objects, so these tiles render on top of player
+        add(level.backgroundTiles);
+
         // Add tilemaps
         add(level.foregroundTiles);
 
@@ -62,8 +65,7 @@ class PlayState extends FlxState
         // Load player objects
         level.loadObjects(this);
 
-        // Add background tiles after adding level objects, so these tiles render on top of player
-        add(level.backgroundTiles);
+        level.backgroundTiles.visible = false;
 
         /*
         // Create UI
@@ -133,6 +135,9 @@ class PlayState extends FlxState
                 //moveSpeed = player.maxVelocity.x * 100000;
                 moveSpeed = player.maxVelocity.x * 22;
                 this.overlay.visible = true;
+                level.foregroundTiles.visible = false;
+                level.backgroundTiles.visible = true;
+
             } else {
                 if(FlxG.sound.music != null) {
                     FlxG.sound.music.stop();
@@ -142,6 +147,8 @@ class PlayState extends FlxState
                 jumpVelocity = -player.maxVelocity.y / 2;
                 moveSpeed = player.maxVelocity.x;
                 this.overlay.visible = false;
+                level.foregroundTiles.visible = true;
+                level.backgroundTiles.visible = false;
             }
         }
 
