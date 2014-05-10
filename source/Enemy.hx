@@ -7,7 +7,8 @@ import flixel.FlxObject;
 class Enemy extends FlxSprite {
     var origPos : FlxPoint;
     var speed = 30.0;
-    public function new(x,y) {
+    var level:TiledLevel;
+    public function new(x,y, level:TiledLevel) {
         super(x, y);
         //this.loadGraphic("assets/images/Stationary.png");
         this.loadGraphic("assets/images/Enemy.png", true, 64, 64);
@@ -16,11 +17,23 @@ class Enemy extends FlxSprite {
         origPos = new FlxPoint(x, y);
         this.facing = FlxObject.LEFT;
         this.velocity.x = -speed;
+        this.level = level;
     }
 
     override public function update():Void {
         super.update();       
         var DELTA = 100;
+
+        if(this.level.collideWithLevel(this)) {
+            if(this.facing == FlxObject.LEFT) {
+                this.facing = FlxObject.RIGHT;
+                this.velocity.x = speed;
+            } else {
+                this.facing = FlxObject.LEFT;
+                this.velocity.x = -speed;
+            }
+        }
+/*
         if(this.facing == FlxObject.LEFT) {
             if(x < this.origPos.x - DELTA) {
                 this.facing = FlxObject.RIGHT;
@@ -33,5 +46,6 @@ class Enemy extends FlxSprite {
                 this.velocity.x = -speed;
             }
         }
+*/
     }
 }

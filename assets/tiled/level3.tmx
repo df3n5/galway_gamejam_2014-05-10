@@ -34,9 +34,9 @@
  </objectgroup>
  <objectgroup name="enemy" width="220" height="18">
   <object name="enemy" type="enemy" x="416" y="320" width="32" height="32"/>
-  <object name="vertEnemy" x="736" y="224" width="32" height="32"/>
-  <object name="vertEnemy" x="768" y="192" width="32" height="32"/>
-  <object name="vertEnemy" x="800" y="256" width="32" height="32"/>
+  <object name="vertEnemy" type="enemy2" x="736" y="224" width="32" height="32"/>
+  <object name="vertEnemy" type="enemy2" x="768" y="192" width="32" height="32"/>
+  <object name="vertEnemy" type="enemy2" x="800" y="256" width="32" height="32"/>
   <object name="enemy" type="enemy" x="512" y="320" width="32" height="32"/>
   <object name="enemy" type="enemy" x="1152" y="96" width="32" height="32"/>
  </objectgroup>

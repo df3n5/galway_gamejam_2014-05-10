@@ -115,7 +115,10 @@ class TiledLevel extends TiledMap
 				var floor = new FlxObject(x, y, o.width, o.height);
 				state.floor = floor;
 			case "enemy":
-				var enemy = new Enemy(x, y);
+				var enemy = new Enemy(x, y, this);
+				state.addEnemy(enemy);
+			case "enemy2":
+				var enemy = new Enemy2(x, y);
 				state.addEnemy(enemy);
 			case "coin":
 				var tileset = g.map.getGidOwner(o.gid);
