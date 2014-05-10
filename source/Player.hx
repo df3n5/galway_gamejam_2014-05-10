@@ -12,6 +12,9 @@ class Player extends FlxSprite {
         this.animation.play("walk");
 
         this.animation.add("stop", [8], 10, true);
+
+        this.animation.add("normalwalk", [9, 10, 11, 12], 10, true);
+        this.animation.add("normalstop", [9], 10, true);
     }
 
     override public function update():Void {
