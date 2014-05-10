@@ -139,14 +139,15 @@ class PlayState extends FlxState
             }
         }
 
-        FlxG.overlap(enemies, player, collideEnemy);
+        FlxG.overlap(enemies, player, collideEnemy, pixelPerfectProcess);
 
         // Collide with foreground tile layer
         level.collideWithLevel(player);
 
         //FlxG.overlap(enemies, player, getCoin);
 
-        FlxG.overlap(exit, player, win);
+        FlxG.overlap(exit, player, win, pixelPerfectProcess);
+
 
         if (FlxG.overlap(player, floor))
         {
@@ -186,5 +187,14 @@ class PlayState extends FlxState
     public function addEnemy(enemy:FlxObject):Void {
         this.add(enemy);
         this.enemies.add(enemy);
+    }
+
+    private function pixelPerfectProcess(officer:FlxObject, bullet:FlxObject):Bool {
+        var castBullet:FlxSprite = cast(bullet, FlxSprite);
+        var castOfficer:FlxSprite = cast(officer, FlxSprite);
+        if(FlxG.pixelPerfectOverlap(castBullet, castOfficer)) {
+            return true;
+        }
+        return false;
     }
 }
