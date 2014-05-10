@@ -27,7 +27,7 @@
   <object name="floor" type="floor" x="0" y="544" width="1152" height="32"/>
  </objectgroup>
  <objectgroup color="#0000ff" name="player start" width="220" height="18">
-  <object name="start" type="player_start" x="32" y="448" width="32" height="32"/>
+  <object name="start" type="player_start" x="32" y="416" width="32" height="32"/>
  </objectgroup>
  <objectgroup color="#a40002" name="exit" width="220" height="18">
   <object x="1248" y="256" width="32" height="32"/>
