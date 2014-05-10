@@ -58,10 +58,11 @@ class PlayState extends FlxState
 		score.borderStyle = FlxText.BORDER_SHADOW;
 		status.alignment = "right";
 		
-		if (youDied == false)
+		if (youDied == false) {
 			status.text = "Collect coins.";
-		else
+        } else {
 			status.text = "Aww, you died!";
+        }
 		
 		add(status);
 	}
@@ -108,11 +109,13 @@ class PlayState extends FlxState
 	{
 		Coin.kill();
 		score.text = "SCORE: " + (coins.countDead() * 100);
+        /*
 		if (coins.countLiving() == 0)
 		{
 			status.text = "Find the exit";
 			exit.exists = true;
 		}
+        */
 	}
 	
 }

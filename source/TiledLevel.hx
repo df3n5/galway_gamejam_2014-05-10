@@ -13,10 +13,6 @@ import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectGroup;
 import flixel.addons.editors.tiled.TiledTileSet;
 
-/**
- * ...
- * @author Samuel Batista
- */
 class TiledLevel extends TiledMap
 {
 	// For each "Tile Layer" in the map, you must define a "tileset" property which contains the name of a tile sheet image 
@@ -127,7 +123,7 @@ class TiledLevel extends TiledMap
 				// Create the level exit
 				var exit = new FlxSprite(x, y);
 				exit.makeGraphic(32, 32, 0xff3f3f3f);
-				exit.exists = false;
+				exit.exists = true;
 				state.exit = exit;
 				state.add(exit);
 		}
