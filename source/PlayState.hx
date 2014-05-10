@@ -30,7 +30,7 @@ class PlayState extends FlxState
     private var moveSpeed:Float;
     private var music:FlxSound;
 
-    public static var MAX_LEVELS = 3;
+    public static var MAX_LEVELS = 5;
 
     public function new(levelNo:Int, glitched:Bool, died:Bool):Void {
         super();
@@ -145,6 +145,12 @@ class PlayState extends FlxState
         }
         if (FlxG.keys.justPressed.THREE) {
             FlxG.switchState(new PlayState(3, true, true));
+        }
+        if (FlxG.keys.justPressed.FOUR) {
+            FlxG.switchState(new PlayState(4, true, true));
+        }
+        if (FlxG.keys.justPressed.FIVE) {
+            FlxG.switchState(new PlayState(5, true, true));
         }
 
         var nothingPressed = true;
