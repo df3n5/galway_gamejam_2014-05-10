@@ -92,24 +92,33 @@ class PlayState extends FlxState
                 jumpVelocity = -player.maxVelocity.y / 2;
             }
         }
+        var nothingPressed = true;
 		if (FlxG.keys.pressed.LEFT || FlxG.keys.pressed.A)
 		{
+            nothingPressed = false;
 			player.acceleration.x = -player.maxVelocity.x * 4;
             //player.facing = FlxObject.LEFT;
             player.flipX = true;
 		}
 		if (FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.D)
 		{
+            nothingPressed = false;
 			player.acceleration.x = player.maxVelocity.x * 4;
             //player.facing = FlxObject.RIGHT;
             player.flipX = false;
 		}
 		if (FlxG.keys.pressed.W && player.isTouching(FlxObject.FLOOR))
 		{
+            nothingPressed = false;
 			//player.velocity.y = -player.maxVelocity.y / 2;
 			player.velocity.y = jumpVelocity;
 		}
 		super.update();
+        if(nothingPressed) {
+            player.animation.play("stop");
+        } else {
+            player.animation.play("walk");
+        }
 		
 		FlxG.overlap(coins, player, getCoin);
 		
