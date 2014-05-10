@@ -118,7 +118,7 @@ class TiledLevel extends TiledMap
 				var enemy = new Enemy(x, y, this);
 				state.addEnemy(enemy);
 			case "enemy2":
-				var enemy = new Enemy2(x, y);
+				var enemy = new Enemy2(x, y, this);
 				state.addEnemy(enemy);
 			case "coin":
 				var tileset = g.map.getGidOwner(o.gid);
