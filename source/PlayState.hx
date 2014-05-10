@@ -114,10 +114,18 @@ class PlayState extends FlxState
 			player.velocity.y = jumpVelocity;
 		}
 		super.update();
-        if(nothingPressed) {
-            player.animation.play("stop");
+        if(glitchMode) {
+            if(nothingPressed) {
+                player.animation.play("stop");
+            } else {
+                player.animation.play("walk");
+            }
         } else {
-            player.animation.play("walk");
+            if(nothingPressed) {
+                player.animation.play("normalstop");
+            } else {
+                player.animation.play("normalwalk");
+            }
         }
 		
 		FlxG.overlap(coins, player, getCoin);
