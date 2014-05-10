@@ -24,7 +24,8 @@ class FinishState extends FlxState {
         super.update();
         //text.alpha = tween.alpha;
         if(FlxG.keys.pressed.SPACE || FlxG.mouse.justPressed) {
-            FlxG.switchState(new PlayState(0, true, true));
+            //FlxG.switchState(new PlayState(0, true, true));
+            FlxG.switchState(new MenuState());
         }
     }   
 }
