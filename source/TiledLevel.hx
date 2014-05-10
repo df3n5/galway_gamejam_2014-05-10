@@ -125,7 +125,10 @@ class TiledLevel extends TiledMap
 			case "exit":
 				// Create the level exit
 				var exit = new FlxSprite(x, y);
-				exit.makeGraphic(32, 32, 0xff3f3f3f);
+                exit.loadGraphic("assets/tiled/Door.png", true, 64, 64);
+                exit.animation.add("normal", [0], 10, true);
+                exit.animation.add("weird", [1], 10, true);
+				//exit.makeGraphic(32, 32, 0xff3f3f3f);
 				exit.exists = true;
 				state.exit = exit;
 				state.add(exit);

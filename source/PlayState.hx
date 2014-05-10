@@ -133,6 +133,7 @@ class PlayState extends FlxState
         }
         super.update();
         if(glitchMode) {
+            exit.animation.play("weird");
             if(nothingPressed) {
                 player.animation.play("stop");
             } else {
@@ -140,6 +141,7 @@ class PlayState extends FlxState
                 player.drag.x = 0;
             }
         } else {
+            exit.animation.play("normal");
             if(nothingPressed) {
                 player.animation.play("normalstop");
             } else {
