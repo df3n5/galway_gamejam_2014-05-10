@@ -21,6 +21,7 @@ class PlayState extends FlxState
 	public var glitchMode:Bool;
 	
 	private static var youDied:Bool = false;
+	private var jumpVelocity:Float;
 	
 	override public function create():Void 
 	{
@@ -66,6 +67,7 @@ class PlayState extends FlxState
         } else {
 			status.text = "Aww, you died!";
         }
+        jumpVelocity = -player.maxVelocity.y / 2;
 		
 		add(status);
 	}
@@ -77,8 +79,10 @@ class PlayState extends FlxState
             glitchMode = ! glitchMode;
             if(glitchMode) {
                 FlxG.camera.color = 0x00FF00FF;
+                jumpVelocity = -player.maxVelocity.y;
             } else {
                 FlxG.camera.color = 0xFFFFFFFF;
+                jumpVelocity = -player.maxVelocity.y / 2;
             }
         }
 		if (FlxG.keys.pressed.LEFT || FlxG.keys.pressed.A)
@@ -91,7 +95,8 @@ class PlayState extends FlxState
 		}
 		if (FlxG.keys.pressed.W && player.isTouching(FlxObject.FLOOR))
 		{
-			player.velocity.y = -player.maxVelocity.y / 2;
+			//player.velocity.y = -player.maxVelocity.y / 2;
+			player.velocity.y = jumpVelocity;
 		}
 		super.update();
 		
