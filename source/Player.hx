@@ -8,6 +8,8 @@ class Player extends FlxSprite {
         super(x, y);
         //this.loadGraphic("assets/images/Stationary.png");
         this.loadGraphic("assets/images/Run.png", true, 64, 64);
+        this.offset.x += this.width*0.25;
+        this.width *=0.5;
         this.animation.add("walk", [0, 1, 2, 3, 4, 8, 5, 6, 7], 10, true);
         this.animation.play("walk");
 

@@ -88,8 +88,7 @@ class TiledLevel extends TiledMap
 		}
 	}
 	
-	private function loadObject(o:TiledObject, g:TiledObjectGroup, state:PlayState)
-	{
+	private function loadObject(o:TiledObject, g:TiledObjectGroup, state:PlayState) {
 		var x:Int = o.x;
 		var y:Int = o.y;
 		
