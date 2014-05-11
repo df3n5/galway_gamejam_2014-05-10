@@ -46,7 +46,7 @@
 	
 	<!--------------------------------HAXEDEFINES----------------------------------->
 	
-	<!--Enable the Flixel core recording system-->
+    <!--Enable the Flixel core recording system/-->
 	<!--haxedef name="FLX_RECORD" /-->
 	
 	<!--Disable the right and middle mouse buttons-->
@@ -75,8 +75,6 @@
 	
 	<!--Enable this for Nape release builds for a serious peformance improvement-->
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
-	
-	<!--------------------------------CUSTOM---------------------------------------->
 	
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
 
